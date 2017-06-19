@@ -1,5 +1,5 @@
 - Feature Name: fs-layout-survey
-- Start Date: 20017-06-17
+- Start Date: 2017-06-17
 - RFC PR: (leave this empty)
 - Redox Issue: (leave this empty)
 
@@ -36,10 +36,10 @@ All this issues make it difficult to manage the system by power users and admins
 
 # Detailed design
 [design]: #detailed-design
-All files must belong to one of the categories:
+All files must belong to one of the categories and should be located in the corresponding directory:
 - boot loader;
-- OS(s) files;
-- OS(s) configuration files;
+- OS files;
+- OS configuration files;
 - drivers;
 - applications files; 
 - applications global configuration files; 
@@ -47,12 +47,20 @@ All files must belong to one of the categories:
 - users data;
 - temporary files;
 - run-time files.
+## OS files
+Minimal set of files to manage OS from CLI, like: kernel, drivers, shell; disk, networking, keyboard utilities and
+so on.
+## OS configuration files
+Should be  files to configure kernel parameters or parameters related to resources, managed by kernel only: disks, networking, memory,processes and hardware.
+## User configuration and data files
+User's home directory should be always clean from any user's, system's and application's configuration files or files like DE's 'Desktop' directory and should not force any hierarchy inside.
+There should not be a concept like "hidden file" to hide those files existence from user.
+Also "hidden file" concept is alogical and counterintuitive.
 
-Files of one category should be located in the corresponding directory only.
-As option, it would be nice to be able to install multiple versions of RedoxOS and applications.
-There should not be a concept like "hidden file".
-Temporary files should be stored per user.
-User's home directory should be clean from any "system or application" files and should not force any hierarchy inside.
+*All* user configuration should be stored:
+- in the dedicated directory outside the user's home directory;
+- in the directory in user home directory.
+
 
 So hierarchy could be like:
 ```
