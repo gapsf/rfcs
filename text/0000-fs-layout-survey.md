@@ -5,34 +5,22 @@
 
 # Summary
 [summary]: #summary
-Proposes clear separation of:
-- OS files;
-- OS configuration files;
-- application files; 
-- application configuration files; 
-- user's environment configuration files;
-- user's data;
-- run-time files.
+Suggests clear separation of OS files, applications files, configuration files, user's data files.
 
 # Motivation
 [motivation]: #motivation
-## Windows
-In Windows, system directory (most often 'c:\windows') constantly changing and polluted with different sort of files
-like app's shared libraries, binaries and other type of files.
-It's mostly impossible to copy OS configuration from one instance to another.
-
-User's home directories (aka 'profiles') are polluted by myriads of configuration directories and files which are hidden
-from ordinary users to pretend they don't exists and all it's configuration stuff 'magically' stored somewhere.
-Abstractions that hide filesystem from the user, like DE's 'Desktop' and configuration also lays directly 
+## Configuration and DE's files in home directory
+In GNU/Linux and Windows user's home directories are polluted by myriads of configuration directories and files created
+by programs.
+Abstractions that hide filesystem from the user, like DE's 'Desktop' and configuration also lays down directly 
 in user's home directory.
+**So user does not have a clean place to store his/her own data.**
 
-## GNU/Linux
-Application files spreads over whole FS hierarchy and having multiple versions of some software a very difficult or impossible.
+To overcome this problem those files are "hidden" from users to pretend they don't exists since ordinary users shouldn't see o touch these files.
+"Hidden file" concept is alogical and counterintuitive - file should be placed in the "correct" place, not hidden.
 
-User's home directories (/home/*) are also polluted by configuration directories and files which are hidden
-from ordinary users to pretend they don't exists.
-
-All this issues make it difficult to manage the system by power users and admins.
+Also users partially forced to store own data files in files hierarhy predefined by DE.
+It is inconvenient for power/exprienced users and admins to manage his/her files home directory with file managers.
 
 # Detailed design
 [design]: #detailed-design
@@ -51,11 +39,10 @@ All files must belong to one of the categories and should be located in the corr
 Minimal set of files to manage OS from CLI, like: kernel, drivers, shell; disk, networking, keyboard utilities and
 so on.
 ## OS configuration files
-Should be  files to configure kernel parameters or parameters related to resources, managed by kernel only: disks, networking, memory,processes and hardware.
+Files to configure kernel parameters or parameters related to resources, managed by kernel only: disks, networking, memory, processes and hardware.
 ## User configuration and data files
 User's home directory should be always clean from any user's, system's and application's configuration files or files like DE's 'Desktop' directory and should not force any hierarchy inside.
 There should not be a concept like "hidden file" to hide those files existence from user.
-Also "hidden file" concept is alogical and counterintuitive.
 
 *All* user configuration should be stored:
 - in the dedicated directory outside the user's home directory;
